@@ -2,8 +2,12 @@ backend:
   name: git-gateway
   branch: main
 
+site_url: https://tonieexmaple.netlify.app
+
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
+
+publish_mode: editorial_workflow
 
 collections:
   - name: "articles"
