@@ -1,24 +1,549 @@
-<div id="posts"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kia Kirsten Alonzo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pink:#e8457a;
+  --pink-light:#fce4ed;
+  --green:#1ea87c;
+  --green-light:#d4f5ea;
+  --cream:#fdf8f4;
+  --ink:#1a1714;
+  --muted:#7a6f6a;
+  --surface:#ffffff;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);font-size:15px;line-height:1.7;min-height:100vh;overflow-x:hidden}
 
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  background:rgba(253,248,244,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(26,23,20,0.07);
+}
+.nav-inner{
+  max-width:1060px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 24px;
+}
+.brand{
+  font-family:var(--serif);font-size:18px;color:var(--ink);letter-spacing:-0.01em;
+  text-decoration:none;font-style:italic;
+}
+.brand span{color:var(--pink)}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links button{
+  background:none;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:13px;font-weight:400;
+  color:var(--muted);padding:6px 12px;border-radius:999px;
+  transition:background 0.18s,color 0.18s;
+  letter-spacing:0.01em;
+}
+.nav-links button:hover,.nav-links button.active{background:var(--ink);color:#fff}
+
+/* PAGE SYSTEM */
+.page{display:none}
+.page.visible{display:block}
+
+/* MAIN WRAPPER */
+main{max-width:1060px;margin:0 auto;padding:110px 24px 80px}
+
+/* ── HERO ── */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:40px;align-items:start;
+  padding:20px 0 60px;
+}
+.hero-eyebrow{
+  font-size:13px;font-weight:400;color:var(--muted);
+  letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(52px,7vw,88px);
+  line-height:1;letter-spacing:-0.03em;color:var(--ink);
+  margin-bottom:6px;
+}
+.hero h1 em{color:var(--pink);font-style:italic}
+.hero-sub{
+  font-family:var(--serif);font-size:20px;font-style:italic;
+  color:var(--green);margin-bottom:20px;font-weight:400;
+}
+.hero-desc{color:var(--muted);max-width:480px;line-height:1.75;margin-bottom:28px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.pill{
+  font-size:12px;padding:5px 12px;border-radius:999px;
+  border:1px solid rgba(26,23,20,0.14);
+  background:var(--surface);color:var(--muted);
+  letter-spacing:0.04em;
+}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap}
+.btn-main{
+  background:var(--ink);color:#fff;border:none;
+  padding:12px 22px;border-radius:999px;cursor:pointer;
+  font-family:var(--sans);font-size:13px;font-weight:500;
+  letter-spacing:0.02em;transition:opacity 0.18s;
+}
+.btn-main:hover{opacity:0.82}
+.btn-outline{
+  background:none;color:var(--ink);
+  border:1.5px solid rgba(26,23,20,0.2);
+  padding:11px 22px;border-radius:999px;cursor:pointer;
+  font-family:var(--sans);font-size:13px;font-weight:400;
+  transition:border-color 0.18s,background 0.18s;
+}
+.btn-outline:hover{border-color:var(--ink);background:rgba(26,23,20,0.04)}
+
+/* HERO CARD */
+.hero-card{
+  background:var(--surface);border-radius:20px;
+  border:1px solid rgba(26,23,20,0.08);
+  padding:26px;
+  position:relative;top:10px;
+}
+.status-dot{
+  display:inline-block;width:8px;height:8px;
+  background:var(--green);border-radius:50%;margin-right:8px;
+}
+.hero-card-label{font-size:12px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px}
+.hero-card-body{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.hero-card-divider{height:1px;background:rgba(26,23,20,0.07);margin:0 0 20px}
+.hero-card-stat{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.stat-item{}
+.stat-num{font-family:var(--serif);font-size:28px;color:var(--ink);line-height:1}
+.stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px}
+.accent-blob{
+  position:absolute;top:-30px;right:-30px;
+  width:120px;height:120px;border-radius:50%;
+  background:var(--pink-light);opacity:0.6;z-index:-1;
+}
+
+/* MARQUEE */
+.marquee-wrap{
+  border-top:1px solid rgba(26,23,20,0.07);
+  border-bottom:1px solid rgba(26,23,20,0.07);
+  padding:14px 0;overflow:hidden;white-space:nowrap;
+  margin-bottom:72px;
+}
+.marquee-track{
+  display:inline-flex;animation:marquee 22s linear infinite;
+}
+.marquee-item{
+  font-family:var(--serif);font-style:italic;font-size:16px;
+  color:var(--muted);padding:0 32px;
+}
+.marquee-dot{color:var(--pink);margin-left:-16px}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION STYLES */
+.section-label{
+  font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--green);margin-bottom:6px;
+}
+.section-title{
+  font-family:var(--serif);font-size:clamp(28px,4vw,44px);
+  line-height:1.1;letter-spacing:-0.02em;color:var(--ink);
+  margin-bottom:24px;
+}
+.section-title em{color:var(--pink);font-style:italic}
+
+/* ABOUT */
+#about-section{margin-bottom:80px}
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:32px;align-items:start}
+.about-text{color:var(--muted);line-height:1.8;font-size:15px}
+.about-text p+p{margin-top:16px}
+.about-right{}
+.about-box{
+  background:var(--surface);border-radius:16px;
+  border:1px solid rgba(26,23,20,0.08);padding:22px;
+  margin-bottom:14px;
+}
+.about-box h4{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:12px;letter-spacing:0.02em}
+.tool-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tool-tag{
+  font-size:11px;padding:4px 10px;border-radius:6px;
+  background:var(--cream);border:1px solid rgba(26,23,20,0.1);color:var(--muted);
+}
+
+/* WORK */
+#work-section{margin-bottom:80px}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.project-card{
+  background:var(--surface);border-radius:20px;
+  border:1px solid rgba(26,23,20,0.08);
+  padding:24px;
+  transition:transform 0.2s,box-shadow 0.2s;
+  display:flex;flex-direction:column;
+}
+.project-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.08)}
+.project-type{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--green);margin-bottom:12px}
+.project-card h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin-bottom:10px;line-height:1.2}
+.project-card p{font-size:14px;color:var(--muted);line-height:1.7;flex:1;margin-bottom:16px}
+.project-meta{font-size:11px;color:rgba(122,111,106,0.7);letter-spacing:0.04em;border-top:1px solid rgba(26,23,20,0.07);padding-top:12px}
+.project-card.featured{
+  background:var(--ink);color:#fff;
+  grid-column:span 2;
+  flex-direction:row;align-items:center;gap:32px;
+}
+.project-card.featured .project-type{color:var(--green)}
+.project-card.featured h3,.project-card.featured p,.project-card.featured .project-meta{color:rgba(255,255,255,0.85)}
+.project-card.featured h3{color:#fff;font-size:28px}
+.featured-text{flex:1}
+.featured-badge{
+  background:var(--pink);color:#fff;font-size:11px;
+  padding:6px 14px;border-radius:999px;
+  white-space:nowrap;align-self:flex-start;
+}
+
+/* ARTICLES PAGE */
+#articles-page main{padding-top:100px}
+.articles-header{margin-bottom:48px}
+.back-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:13px;color:var(--muted);
+  padding:0;display:flex;align-items:center;gap:6px;
+  margin-bottom:24px;transition:color 0.18s;
+}
+.back-btn:hover{color:var(--ink)}
+.articles-list{display:flex;flex-direction:column;gap:16px}
+.article-card{
+  background:var(--surface);border-radius:16px;
+  border:1px solid rgba(26,23,20,0.08);
+  padding:28px 32px;
+  transition:transform 0.18s;
+}
+.article-card:hover{transform:translateX(4px)}
+.article-tag{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--green);margin-bottom:8px}
+.article-card h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin-bottom:8px;line-height:1.25}
+.article-card p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.article-meta{font-size:12px;color:rgba(122,111,106,0.6);display:flex;gap:16px}
+.read-link{
+  margin-left:auto;font-size:12px;color:var(--pink);
+  text-decoration:none;font-weight:500;letter-spacing:0.02em;
+}
+.read-link:hover{text-decoration:underline}
+
+/* CONTACT */
+#contact-section{margin-bottom:60px}
+.contact-band{
+  background:var(--ink);border-radius:24px;
+  padding:48px 40px;
+  display:grid;grid-template-columns:1fr auto;
+  gap:40px;align-items:center;
+}
+.contact-band h3{
+  font-family:var(--serif);font-size:36px;color:#fff;
+  line-height:1.1;margin-bottom:10px;
+}
+.contact-band h3 em{color:var(--pink);font-style:italic}
+.contact-band p{color:rgba(255,255,255,0.55);font-size:14px;line-height:1.7;max-width:400px}
+.contact-details{display:flex;flex-direction:column;gap:14px}
+.contact-item{text-align:right}
+.contact-item-lbl{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:3px}
+.contact-item a,.contact-item-val{color:#fff;text-decoration:none;font-size:14px}
+.contact-item a:hover{color:var(--pink)}
+
+/* FOOTER */
+footer{
+  text-align:center;padding:32px 24px;
+  font-size:12px;color:rgba(122,111,106,0.5);
+  letter-spacing:0.04em;border-top:1px solid rgba(26,23,20,0.06);
+}
+
+/* RESPONSIVE */
+@media(max-width:720px){
+  .hero{grid-template-columns:1fr}
+  .hero-aside{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .project-card.featured{grid-column:span 1;flex-direction:column}
+  .contact-band{grid-template-columns:1fr}
+  .contact-details{text-align:left}
+  .contact-item{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#" onclick="showPage('home')">Kia <span>Kirsten</span></a>
+    <div class="nav-links">
+      <button class="active" onclick="showPage('home');setActive(this)">Home</button>
+      <button onclick="scrollToSection('about-section');showPage('home')">About</button>
+      <button onclick="scrollToSection('work-section');showPage('home')">Work</button>
+      <button onclick="showPage('articles');setActive(this)">Articles</button>
+      <button onclick="scrollToSection('contact-section');showPage('home')">Contact</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ HOME PAGE ═══════════ -->
+<div id="page-home" class="page visible">
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-main">
+        <p class="hero-eyebrow">Hey, I'm Kia 👋</p>
+        <h1>Kia<br/><em>Kirsten</em><br/>Alonzo</h1>
+        <p class="hero-sub">Creative dev · writer · person online</p>
+        <p class="hero-desc">
+          I turn small ideas into things people can click, read, and share.
+          Frontend experiments, casual essays, and the occasional oversharing
+          in long-form — this is where I put it all.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Frontend dev</span>
+          <span class="pill">Writing</span>
+          <span class="pill">Design-ish</span>
+          <span class="pill">Personal web</span>
+          <span class="pill">Quezon City 🇵🇭</span>
+        </div>
+        <div class="cta-row">
+          <button class="btn-main" onclick="scrollToSection('work-section')">View projects</button>
+          <button class="btn-outline" onclick="showPage('articles')">Read articles</button>
+        </div>
+      </div>
+      <div class="hero-aside">
+        <div class="hero-card">
+          <div class="accent-blob"></div>
+          <p class="hero-card-label"><span class="status-dot"></span>Currently</p>
+          <p class="hero-card-body">Building small web things, documenting the process, and trying to keep my Figma files less chaotic than my brain.</p>
+          <div class="hero-card-divider"></div>
+          <div class="hero-card-stat">
+            <div class="stat-item">
+              <div class="stat-num">12+</div>
+              <div class="stat-lbl">Projects</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">3+</div>
+              <div class="stat-lbl">Years making</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">∞</div>
+              <div class="stat-lbl">Unread tabs</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">☕</div>
+              <div class="stat-lbl">Daily ritual</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <span class="marquee-item">HTML & CSS</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">JavaScript</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">React-ish things</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">Markdown</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">Figma</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">Writing</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">Personal web</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">HTML & CSS</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">JavaScript</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">React-ish things</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">Markdown</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">Figma</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">Writing</span><span class="marquee-dot">·</span>
+        <span class="marquee-item">Personal web</span><span class="marquee-dot">·</span>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about-section">
+      <p class="section-label">About</p>
+      <h2 class="section-title">A tiny intro,<br/><em>not a TED Talk</em></h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm Kia — a creative dev who likes clean layouts, playful color palettes,
+            and interfaces that feel friendly instead of corporate. I'm based in Quezon City
+            and I spend most of my time making small things for the web.
+          </p>
+          <p>
+            I enjoy writing about what I build, what I learn, and the small things
+            that keep me curious. If there's a weird CSS bug involved, I'll probably
+            write a whole post about it.
+          </p>
+          <p>
+            Not trying to hustle culture my way through life — just making things I'm
+            actually proud of, one small project at a time.
+          </p>
+        </div>
+        <div class="about-right">
+          <div class="about-box">
+            <h4>Tools I reach for</h4>
+            <div class="tool-tags">
+              <span class="tool-tag">HTML & CSS</span>
+              <span class="tool-tag">JavaScript</span>
+              <span class="tool-tag">React-ish</span>
+              <span class="tool-tag">Markdown</span>
+              <span class="tool-tag">Figma</span>
+              <span class="tool-tag">VS Code</span>
+              <span class="tool-tag">Git</span>
+            </div>
+          </div>
+          <div class="about-box">
+            <h4>What I like making</h4>
+            <p style="font-size:14px;color:var(--muted);line-height:1.7">
+              Small, fast sites. Portfolio-style pages. Quiet landing pages.
+              Personal blogs that feel like they belong to a <em>person</em>, not a brand.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work-section">
+      <p class="section-label">Work</p>
+      <h2 class="section-title">Projects and<br/><em>tiny experiments</em></h2>
+      <div class="projects-grid">
+        <div class="project-card featured">
+          <div class="featured-text">
+            <p class="project-type">⭐ Current obsession</p>
+            <h3>Personal mini blog</h3>
+            <p>A simple markdown-powered blog where I test layouts, colors, and typography without fighting a giant CMS. It's fast, it's mine, and it loads in 0.3s.</p>
+            <p class="project-meta">Built with HTML · CSS · vanilla JS</p>
+          </div>
+          <span class="featured-badge">Live project</span>
+        </div>
+        <div class="project-card">
+          <p class="project-type">Playground</p>
+          <h3>Micro-interaction lab</h3>
+          <p>A collection of tiny UI experiments: hover states, buttons, cards, and other ways to make interfaces feel a bit more alive.</p>
+          <p class="project-meta">Animations · transitions · hover states</p>
+        </div>
+        <div class="project-card">
+          <p class="project-type">Writing</p>
+          <h3>"Notes from the browser"</h3>
+          <p>Short posts about learning frontend, debugging weird bugs, and the gap between design mocks and real code.</p>
+          <p class="project-meta">Markdown + minimal styling</p>
+        </div>
+        <div class="project-card">
+          <p class="project-type">Design</p>
+          <h3>Component shelf</h3>
+          <p>A personal Figma library of components I keep reusing. Mostly cards, inputs, and nav patterns I've refined over time.</p>
+          <p class="project-meta">Figma · design system-ish</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact-section">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Let's keep it<br/><em>casual</em></h2>
+      <div class="contact-band">
+        <div>
+          <h3>Say hi,<br/><em>I don't bite</em></h3>
+          <p>For collabs, questions, or just to send a cool link — reach out. I check my inbox more often than my notifications.</p>
+        </div>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-lbl">Email</div>
+            <a href="mailto:kia@example.com" class="contact-item a">kia@example.com</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-lbl">Social</div>
+            <a href="#" class="contact-item a">Link to socials →</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-lbl">Location</div>
+            <div class="contact-item-val">Quezon City, PH 🇵🇭</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer>© 2026 Kia Kirsten Alonzo · Built with HTML, CSS, and a little bit of JavaScript</footer>
+</div>
+
+<!-- ═══════════ ARTICLES PAGE ═══════════ -->
+<div id="page-articles" class="page">
+  <main>
+    <div class="articles-header">
+      <button class="back-btn" onclick="showPage('home')">← Back to home</button>
+      <p class="section-label">Articles</p>
+      <h2 class="section-title">Things I've<br/><em>written</em></h2>
+      <p style="color:var(--muted);font-size:14px">Essays, notes, and brain dumps. Updated whenever inspiration strikes (or when I can't sleep).</p>
+    </div>
+    <div class="articles-list" id="articles-list">
+  <div style="color:var(--muted);font-size:14px">
+    Loading articles...
+  </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
 <script>
-async function loadPosts() {
-  const res = await fetch('/content/articles/index.json');
-  const files = await res.json();
+async function loadArticles() {
+  const container = document.getElementById("articles-list");
+  container.innerHTML = "";
 
-  const container = document.getElementById('posts');
+  const possibleFiles = [
+    "hello-world.md",
+    "second.md"
+  ];
 
-  for (const file of files) {
-    const md = await fetch('/content/articles/' + file).then(r => r.text());
+  for (const file of possibleFiles) {
+    try {
+      const res = await fetch("./content/articles/" + file)
+      if (!res.ok) continue;
 
-    const html = marked.parse(md);
-    const div = document.createElement('div');
-    div.innerHTML = html;
+      const md = await res.text();
+      const html = marked.parse(md);
 
-    container.appendChild(div);
+      const div = document.createElement("div");
+      div.className = "article-card";
+      div.innerHTML = `<div class="article-content">${html}</div>`;
+
+      container.appendChild(div);
+    } catch (e) {}
   }
 }
 
-loadPosts();
+loadArticles();
 </script>
+  </main>
+  <footer>© 2026 Kia Kirsten Alonzo · Built with HTML, CSS, and a little bit of JavaScript</footer>
+</div>
+
+<script>
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('visible'));
+  document.getElementById('page-'+name).classList.add('visible');
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll('.nav-links button').forEach(b=>{
+    b.classList.toggle('active',b.textContent.trim().toLowerCase()===name||
+      (name==='home'&&b.textContent.trim()==='Home'));
+  });
+}
+function scrollToSection(id){
+  showPage('home');
+  setTimeout(()=>{
+    const el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  },50);
+}
+function setActive(btn){
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
